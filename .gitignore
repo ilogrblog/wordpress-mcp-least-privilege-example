@@ -1,0 +1,9 @@
+.DS_Store
+*.log
+.env
+.env.*
+# Written at run time: application passwords and fixture IDs for the local test bed.
+.state/
+# MCP Adapter release ZIP, downloaded by bin/setup.sh from its official release page.
+vendor-plugins/
+tests/node_modules/

@@ -1,0 +1,21 @@
+# Add to ~/.codex/config.toml, or to .codex/config.toml in a trusted project.
+
+[mcp_servers.wordpress-local]
+command = "docker"
+args = [
+  "compose", "-f", "/path/to/worked-example/compose.yaml",
+  "exec", "-T", "cli",
+  "wp", "mcp-adapter", "serve",
+  "--server=mcp-adapter-default-server",
+  "--user=agent-editor",
+]
+# Every ability runs through the adapter's execute tool, which the adapter
+# marks as destructive, so by Codex's documented rule "writes" should prompt
+# before any ability call. This was not exercised in a Codex session.
+default_tools_approval_mode = "writes"
+
+[mcp_servers.wordpress-http]
+url = "http://localhost:8089/wp-json/mcp/mcp-adapter-default-server"
+# WP_MCP_AUTHORIZATION holds the whole header value: "Basic <base64 of login:application-password>".
+env_http_headers = { "Authorization" = "WP_MCP_AUTHORIZATION" }
+default_tools_approval_mode = "writes"

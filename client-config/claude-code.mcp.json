@@ -1,0 +1,22 @@
+{
+  "mcpServers": {
+    "wordpress-local": {
+      "type": "stdio",
+      "command": "docker",
+      "args": [
+        "compose", "-f", "/path/to/worked-example/compose.yaml",
+        "exec", "-T", "cli",
+        "wp", "mcp-adapter", "serve",
+        "--server=mcp-adapter-default-server",
+        "--user=agent-editor"
+      ]
+    },
+    "wordpress-http": {
+      "type": "http",
+      "url": "http://localhost:8089/wp-json/mcp/mcp-adapter-default-server",
+      "headers": {
+        "Authorization": "Basic ${WP_MCP_BASIC_AUTH}"
+      }
+    }
+  }
+}
